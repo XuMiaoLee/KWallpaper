@@ -8,10 +8,10 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
-        app:tabBackground="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabBackground="@color/colorWhite"
         app:tabIndicatorHeight="2dp"
-        app:tabSelectedTextColor="@color/colorPrimaryText"/>
+        app:tabSelectedTextColor="?attr/colorPrimaryText"/>
 
 </LinearLayout>

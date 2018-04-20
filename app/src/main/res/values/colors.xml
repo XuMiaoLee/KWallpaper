@@ -9,4 +9,12 @@
     <!--分割线-->
     <color name="colorDivider">#BDBDBD</color>
     <color name="tabIndicatorColor">#607D8B</color>
+
+    <!--Green Theme-->
+    <color name="colorGreen">#4CAF50</color>
+    <color name="colorGreenDark">#388E3C</color>
+    <color name="colorGreenLight">#C8E6C9</color>
+    <color name="colorDeepOrange">#FF5722</color>
+
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

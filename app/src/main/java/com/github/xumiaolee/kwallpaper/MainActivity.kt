@@ -1,11 +1,14 @@
 package com.github.xumiaolee.kwallpaper
 
+import android.app.Activity
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import com.github.xumiaolee.kwallpaper.fragments.PortraitFragment
@@ -16,13 +19,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = resources.getColor(android.R.color.transparent)
+        }
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -30,8 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-
-        supportFragmentManager.beginTransaction().add(R.id.container,PortraitFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.container, PortraitFragment()).commit()
     }
 
     override fun onBackPressed() {
@@ -61,27 +61,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+            R.id.nav_theme -> {
+                startActivityForResult(Intent(this, ThemeActivity::class.java), 0)
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            //切换主题，更改颜色
+            setTheme(ThemeHelper.init(this).getThemeRes())
+            val colorPrimary = TypedValue()
+            val colorPrimaryDark = TypedValue()
+            theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true)
+            theme.resolveAttribute(R.attr.colorPrimaryDark, colorPrimaryDark, true)
+            toolbar.setBackgroundResource(colorPrimary.resourceId)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.statusBarColor = resources.getColor(colorPrimaryDark.resourceId)
+                window.statusBarColor = resources.getColor(android.R.color.transparent)
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

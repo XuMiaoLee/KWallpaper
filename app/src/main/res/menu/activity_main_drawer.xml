@@ -5,32 +5,29 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/nav_portrait"
+            android:icon="@drawable/ic_menu_portrait"
             android:title="手机壁纸"/>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_computer"
+            android:icon="@drawable/ic_menu_computer"
             android:title="电脑壁纸"/>
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:id="@+id/nav_avatar"
+            android:icon="@drawable/ic_menu_avatar"
             android:title="头像"/>
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="铃声"/>
+
     </group>
 
     <item android:title="设置">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:id="@+id/nav_theme"
+                android:icon="@drawable/ic_menu_theme"
                 android:title="主题"/>
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_menu_setting"
                 android:title="设置"/>
         </menu>
     </item>
