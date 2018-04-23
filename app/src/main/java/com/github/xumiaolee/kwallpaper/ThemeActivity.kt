@@ -40,11 +40,11 @@ class ThemeActivity : AppCompatActivity() {
     /**
      * 主题资源列表
      */
-    private val mThemeIntArray: Array<Int> = arrayOf(R.style.AppTheme, R.style.GreenTheme)
+    private val mThemeIntArray: Array<Int> = arrayOf(R.style.AppTheme, R.style.GreenTheme,R.style.BrownTheme)
     /**
      * item颜色
      */
-    private val mItemColors: Array<Int> = arrayOf(R.color.colorPrimary, R.color.colorGreen)
+    private val mItemColors: Array<Int> = arrayOf(R.color.colorPrimary, R.color.colorGreen,R.color.colorBrown)
     /**
      * 原始index,用于返回的时候判断是否更换了主题
      */

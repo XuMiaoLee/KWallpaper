@@ -16,5 +16,11 @@
     <color name="colorGreenLight">#C8E6C9</color>
     <color name="colorDeepOrange">#FF5722</color>
 
+    <!--Brown Theme-->
+    <color name="colorBrown">#795548</color>
+    <color name="colorBrownDark">#5D4037</color>
+    <color name="colorBrownLight">#D7CCC8</color>
+    <color name="colorBlueGrey">#607D8B</color>
+
     <color name="colorWhite">#FFFFFF</color>
 </resources>

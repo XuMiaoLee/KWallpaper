@@ -11,6 +11,7 @@
         <item name="colorSecondaryText">@color/colorSecondaryText</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorNavBackground">@drawable/side_nav_bar_blue</item>
     </style>
 
     <style name="GreenTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -22,6 +23,20 @@
         <item name="colorPrimaryText">@color/colorPrimaryText</item>
         <item name="colorSecondaryText">@color/colorSecondaryText</item>
         <item name="windowActionBar">false</item>
+        <item name="colorNavBackground">@drawable/side_nav_bar_green</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="BrownTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorBrown</item>
+        <item name="colorPrimaryDark">@color/colorBrownDark</item>
+        <item name="colorAccent">@color/colorBlueGrey</item>
+        <item name="colorBackground">@color/colorWhite</item>
+        <item name="colorPrimaryText">@color/colorPrimaryText</item>
+        <item name="colorSecondaryText">@color/colorSecondaryText</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorNavBackground">@drawable/side_nav_bar_brown</item>
         <item name="windowNoTitle">true</item>
     </style>
 
