@@ -10,8 +10,8 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.TypedValue
-import android.view.Menu
 import android.view.MenuItem
+import com.github.xumiaolee.kwallpaper.base.BaseFragment
 import com.github.xumiaolee.kwallpaper.fragments.AvatarFragment
 import com.github.xumiaolee.kwallpaper.fragments.ComputerFragment
 import com.github.xumiaolee.kwallpaper.fragments.PortraitFragment
@@ -57,21 +57,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        menuInflater.inflate(R.menu.main, menu)
+//        return true
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        when (item.itemId) {
+//            R.id.action_settings -> return true
+//            else -> return super.onOptionsItemSelected(item)
+//        }
+//    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
@@ -102,9 +102,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragment = ActivityUtils.createrFragment(clazz)
         //判断该Fragment是否添加
         if (fragment.isAdded)
-            supportFragmentManager.beginTransaction().hide(mCurrentFragment).show(fragment).commit()
+            supportFragmentManager.beginTransaction().hide(mCurrentFragment).show(fragment).commitAllowingStateLoss()
         else
-            supportFragmentManager.beginTransaction().hide(mCurrentFragment).add(R.id.container, fragment).commit()
+            supportFragmentManager.beginTransaction().hide(mCurrentFragment).add(R.id.container, fragment).commitAllowingStateLoss()
         mCurrentFragment = fragment
     }
 
@@ -128,6 +128,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             //设置NavigationView Item点击颜色
             nav_view.itemTextColor = ColorStateListUtils.createrColorStateList(colorPrimary.data)
             nav_view.itemIconTintList = ColorStateListUtils.createrColorStateList(colorPrimary.data)
+
+            (mCurrentFragment as BaseFragment).changeTabLayoutTheme(colorPrimary.resourceId)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

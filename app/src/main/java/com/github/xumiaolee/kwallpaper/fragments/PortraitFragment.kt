@@ -1,7 +1,9 @@
 package com.github.xumiaolee.kwallpaper.fragments
 
+import android.support.v4.app.Fragment
 import android.view.View
 import com.github.xumiaolee.kwallpaper.R
+import com.github.xumiaolee.kwallpaper.adapter.TabsAdapter
 import com.github.xumiaolee.kwallpaper.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_portrait.*
 
@@ -17,11 +19,13 @@ class PortraitFragment : BaseFragment() {
 
     override fun initViews(view: View?) {
 
-        val tabs: Array<String> = resources.getStringArray(R.array.protrait_tabls)
-        //添加Tab
-        tabs.forEach { tabLayout.addTab(tabLayout.newTab()) }
-//设置Tab文字
-        tabs.forEachIndexed { index, s -> tabLayout.getTabAt(index)?.text = s }
+        val tabsTitle: Array<String> = resources.getStringArray(R.array.protrait_tabls)
+        //设置Tab文字
+        tabsTitle.forEachIndexed { index, s -> tabLayout.getTabAt(index)?.text = s }
+        val fragments = arrayListOf<Fragment>(PortraitNewsFragment(), PortraitHotsFragment(), PortraitCategoryFragment())
+        val tabsAdapter = TabsAdapter(activity.supportFragmentManager, fragments, tabsTitle)
+        viewPager.adapter = tabsAdapter
+        tabLayout.setupWithViewPager(viewPager)
 
     }
 
