@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -24,6 +25,7 @@ import kotlinx.android.synthetic.main.nav_header_main.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var mCurrentFragment: Fragment
+    private lateinit var mFragmentManger: FragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +46,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun initDefaultFragment() {
-        mCurrentFragment = PortraitFragment()
-        supportFragmentManager.beginTransaction().add(R.id.container, mCurrentFragment).commit()
+        mFragmentManger = supportFragmentManager
+        mCurrentFragment = ActivityUtils.createFragment(PortraitFragment::class.java)
+        mFragmentManger.beginTransaction().add(R.id.container, mCurrentFragment).commit()
         nav_view.setCheckedItem(R.id.nav_portrait)
     }
 
@@ -54,24 +57,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+            System.exit(0)
         }
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.main, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        when (item.itemId) {
-//            R.id.action_settings -> return true
-//            else -> return super.onOptionsItemSelected(item)
-//        }
-//    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
@@ -99,12 +87,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     private fun switchFragments(clazz: Class<*>, title: String) {
         toolbar.title = title
-        val fragment = ActivityUtils.createrFragment(clazz)
+        val fragment = ActivityUtils.createFragment(clazz)
+        //如果点击的是同一个不进行处理
+        if (fragment == mCurrentFragment) return
         //判断该Fragment是否添加
         if (fragment.isAdded)
-            supportFragmentManager.beginTransaction().hide(mCurrentFragment).show(fragment).commitAllowingStateLoss()
+            mFragmentManger.beginTransaction().hide(mCurrentFragment).show(fragment).commitAllowingStateLoss()
         else
-            supportFragmentManager.beginTransaction().hide(mCurrentFragment).add(R.id.container, fragment).commitAllowingStateLoss()
+            mFragmentManger.beginTransaction().hide(mCurrentFragment).add(R.id.container, fragment).commitAllowingStateLoss()
         mCurrentFragment = fragment
     }
 
@@ -133,5 +123,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
+
 
 }

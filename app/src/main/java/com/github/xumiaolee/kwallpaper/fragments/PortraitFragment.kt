@@ -20,10 +20,8 @@ class PortraitFragment : BaseFragment() {
     override fun initViews(view: View?) {
 
         val tabsTitle: Array<String> = resources.getStringArray(R.array.protrait_tabls)
-        //设置Tab文字
-        tabsTitle.forEachIndexed { index, s -> tabLayout.getTabAt(index)?.text = s }
         val fragments = arrayListOf<Fragment>(PortraitNewsFragment(), PortraitHotsFragment(), PortraitCategoryFragment())
-        val tabsAdapter = TabsAdapter(activity.supportFragmentManager, fragments, tabsTitle)
+        val tabsAdapter = TabsAdapter(activity!!.supportFragmentManager, fragments, tabsTitle)
         viewPager.adapter = tabsAdapter
         tabLayout.setupWithViewPager(viewPager)
 

@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.support.annotation.ColorRes
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.xumiaolee.kwallpaper.R
 import kotlinx.android.synthetic.main.fragment_portrait.*
 
 /**
@@ -24,9 +22,8 @@ abstract class BaseFragment : Fragment() {
     /** 数据是否加载过了*/
     private var hasLoadData = false
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View? = inflater?.inflate(getLayoutId(), container, false)
-        return view
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater?.inflate(getLayoutId(), container, false)
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
@@ -36,18 +33,10 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isViewPrepare = true
         lazyLoadDataIfPrepared()
-    }
-
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        val colorPrimary = TypedValue()
-        context.theme.resolveAttribute(R.attr.colorPrimary, colorPrimary, true)
-        tabLayout.setSelectedTabIndicatorColor(context.resources.getColor(colorPrimary.resourceId))
     }
 
     private fun lazyLoadDataIfPrepared() {
@@ -59,7 +48,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     fun changeTabLayoutTheme(@ColorRes colorPrimary: Int) {
-        tabLayout?.setSelectedTabIndicatorColor(context.resources.getColor(colorPrimary))
+        tabLayout?.setSelectedTabIndicatorColor(context!!.resources.getColor(colorPrimary))
     }
 
     abstract fun lazyLoad()

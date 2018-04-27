@@ -12,7 +12,7 @@ object ActivityUtils {
 
     private val fragments: HashMap<String, Fragment> = HashMap()
 
-    fun createrFragment(clazz: Class<*>): Fragment {
+    fun createFragment(clazz: Class<*>): Fragment {
         val className = clazz.name
         var fragment: Fragment? = null
         if (fragments.containsKey(className)) {
@@ -23,4 +23,6 @@ object ActivityUtils {
         }
         return fragment!!
     }
+
+
 }
